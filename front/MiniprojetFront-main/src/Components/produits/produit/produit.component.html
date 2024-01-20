@@ -1,0 +1,41 @@
+<div role="document" class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="exampleModalCenterTitle" class="modal-title"> Edit Customere </h5><button type="button"
+          data-bs-dismiss="modal" aria-label="Close" (click)="closeDialog()" class="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-3 text-center">
+            <div class="chat-avtar d-inline-flex mx-auto"><img src="assets/images/user/avatar-5.jpg" alt="User image"
+                class="rounded-circle img-fluid wid-70" /></div>
+          </div>
+          <div class="col-sm-9">
+            <div class="form-group">
+              <div class="form-group">
+                <label class="form-label">code</label>
+                <p    name="firstName"
+                  class="form-control" >{{ data.code }}</p>
+              </div>
+              <div class="form-group">
+                <label class="form-label">designation</label>
+                  <p  class="form-control" >{{ data.designation }}</p>
+              </div>
+              <div class="form-group">
+                <label class="form-label">prixAchat</label>
+                  <p  class="form-control" >{{ data.prixAchat }}</p>
+              </div>
+              <div class="form-group">
+                <label class="form-label">prixVente</label>
+                  <p  class="form-control" >{{ data.prixVente }}</p>
+              </div>
+              <div class="form-group">
+                <label class="form-label">designation</label>
+                  <p  class="form-control" >{{ data.categorie.designation }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>

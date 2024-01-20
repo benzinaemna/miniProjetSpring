@@ -1,0 +1,67 @@
+
+<app-card cardTitle="List Produit" blockclass="table-border-style">
+  <div class="dataTable-top d-flex justify-content-between">
+    <div class="dataTable-dropdown">
+      <select title="Select items per page" name="pageSize" class="form-select ng-untouched ng-pristine ng-valid" style="width: auto" [(ngModel)]="selectedPageSize"
+     >
+        <option   value="5">5 items per page</option>
+        <option   value="10">10 items per page</option>
+        <option   value="20">20 items per page</option>
+        <option   value="50">50 items per page</option>
+      </select>
+    </div>
+    <div class="dataTable-search d-flex align-items-center">
+      <div class="col-xs-3 col-sm-auto me-2">
+        <input
+
+          id="table-complete-search"
+          type="text"
+          name="searchTerm"
+          placeholder="Search..."
+          class="form-control ng-untouched ng-pristine ng-valid"
+        />
+      </div>
+      <div class="col-md-6">
+        <a href="javascript:" data-bs-toggle="modal" class="btn btn-primary" (click)="openModal()"> <i class="ti ti-plus f-18"></i> Add Produit </a>
+      </div>
+    </div>
+  </div>
+  <div style="overflow: hidden">
+    <div class="card-body table-border-style ng-star-inserted">
+      <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+        <ng-container *ngFor="let item of displayedColumns" matColumnDef="{{ item }}">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="item === 'action'" sortActionDescription="Sort by {{ item }}">
+            <div class="header-cell-content">{{ item }}</div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="item === 'action'" class="action-cell">
+              <button type="button" class="btn btn-icon btn-link-secondary d-inline-flex" (click)="showRow(element)">
+                <i class="ti ti-eye f-18"></i>
+              </button>
+              <div class="d-inline-flex" style="width: 10px"></div>
+              <button type="button" class="btn btn-icon btn-outline-primary d-inline-flex" (click)="editRow(element)">
+                <i class="ti ti-edit"></i>
+              </button>
+              <div class="d-inline-flex" style="width: 10px"></div>
+              <button type="button" class="btn btn-icon btn-outline-danger d-inline-flex" (click)="deleteRow(element)">
+                <i class="ti ti-trash"></i>
+              </button>
+            </ng-container>
+            <ng-container *ngIf="item !== 'action'">{{ element[item] }}</ng-container>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-end p-2">
+        <ngb-pagination
+        [collectionSize]="totalRecords"
+        [(page)]="page"
+        [boundaryLinks]="true"
+        [pageSize]="this.selectedPageSize"
+        (pageChange)="onPageChange($event)"/>
+      </div>
+  </div>
+</app-card>

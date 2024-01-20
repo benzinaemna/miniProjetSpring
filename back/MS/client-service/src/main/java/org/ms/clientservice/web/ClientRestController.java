@@ -1,0 +1,41 @@
+package org.ms.clientservice.web;
+import org.ms.clientservice.entities.Client;
+import org.ms.clientservice.repository.ClientRepository;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping(value = "/clients")
+public class ClientRestController {
+    @Autowired
+    private ClientRepository clientRepository;
+    @GetMapping(path="/")
+    public List<Client> list()
+    {
+        return clientRepository.findAll();
+    }
+    @GetMapping(path="/{id}")
+    public Client getOne( @PathVariable Long id)
+    {
+        return clientRepository.findById(id).get();
+    }
+    @PostMapping(path="/")
+    public Client save(@RequestBody Client client)
+    {
+        return clientRepository.save(client);
+    }
+    @PutMapping (path="/{id}")
+    public Client update(@PathVariable Long id,@RequestBody Client client)
+    {
+        client.setId(id);
+        return clientRepository.save(client);
+    }
+    @DeleteMapping (path="/{id}")
+    public void delete( @PathVariable Long id)
+    {
+        clientRepository.deleteById( id);
+    }
+}
